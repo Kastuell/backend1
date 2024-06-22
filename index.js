@@ -1,8 +1,11 @@
-var fs = require('fs')
-var multer = require('multer')
-var mongoose = require('mongoose')
-var express = require('express')
-var cors = require('cors')
+
+import cors from 'cors'
+import express from 'express'
+import fs from 'fs'
+import mongoose from 'mongoose'
+import multer from 'multer'
+
+
 import { loginValidation, postCreateValidation, registerValidation } from './validations.js'
 
 import { PostController, UserController } from './controllers/index.js'
