@@ -7,9 +7,9 @@ import mongoose from 'mongoose';
 
 import { loginValidation, postCreateValidation, registerValidation } from './validations.js';
 
+import 'dotenv/config';
 import { PostController, UserController } from './controllers/index.js';
 import { checkAuth, handleValidationErrors } from './utils/index.js';
-require('dotenv').config()
 
 const DB = process.env.DB
 
@@ -34,15 +34,15 @@ const storage = multer.diskStorage({
     }
 });
 
-const upload = multer({storage});
+const upload = multer({ storage });
 
 app.use(express.json());
 app.use(cors());
 app.use('/api/uploads', express.static('uploads'));
 
 
-app.post('/api/auth/login',  loginValidation, handleValidationErrors, UserController.login);
-app.post('/api/auth/register',  registerValidation, handleValidationErrors, UserController.register);
+app.post('/api/auth/login', loginValidation, handleValidationErrors, UserController.login);
+app.post('/api/auth/register', registerValidation, handleValidationErrors, UserController.register);
 app.get('/api/auth/me', checkAuth, UserController.getMe);
 
 app.post('/api/upload', checkAuth, upload.single('image'), (req, res) => {
@@ -62,7 +62,7 @@ app.patch('/api/posts/:id', checkAuth, postCreateValidation, handleValidationErr
 
 
 app.listen(process.env.PORT || 4444, (err) => {
-    if(err) {
+    if (err) {
         return console.log(err);
     }
 
