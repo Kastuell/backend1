@@ -7,14 +7,12 @@ import mongoose from 'mongoose';
 
 import { loginValidation, postCreateValidation, registerValidation } from './validations.js';
 
-import 'dotenv/config';
 import { PostController, UserController } from './controllers/index.js';
 import { checkAuth, handleValidationErrors } from './utils/index.js';
 
-const DB = process.env.DB
 
 mongoose
-    .connect(`${DB}`)
+    .connect("mongodb+srv://admin:wwwwww@cluster0.rz3cyv2.mongodb.net/blog?retryWrites=true&w=majority&appName=Cluster0")
     .then(() => console.log('DB ok'))
     .catch((err) => console.log('DB error', err));
 
@@ -61,7 +59,7 @@ app.delete('/api/posts/:id', checkAuth, PostController.remove);
 app.patch('/api/posts/:id', checkAuth, postCreateValidation, handleValidationErrors, PostController.update);
 
 
-app.listen(process.env.PORT || 4444, (err) => {
+app.listen(4444, (err) => {
     if (err) {
         return console.log(err);
     }
